@@ -1,14 +1,201 @@
-A(); //Function Statement or Function Declaration
-B(); //Uncaught TypeError: B is not a function
-
-function A(){
-    console.log("Function Statement or Function Declaration")
+//**********************Function borrowing************************ */
+function userDetails(city, state){
+    console.log(this.firstName + " " + this.lastName + " from " + city + ", " + state)
 }
-
-var B = function(){
-    console.log("Function Expression")
+let user1={
+    firstName:"Rasmita",
+    lastName:"Dash"
 }
-B(); //Function Expression
+let user2={
+    firstName:"Nipun",
+    lastName:"Bajaj"
+}
+let user3={
+    firstName:"Meenakshi",
+    lastName:"Joshi"
+}
+userDetails.call(user1, "Bangalore", "Karnataka");
+userDetails.apply(user2, ["New Delhi", "Uttar Pradesh"]);
+let user3Details = userDetails.bind(user3, "Delhi", "Delhi");
+user3Details();
+//*****************Debouncing************* */
+let counter =0;
+
+getData = () =>{
+    console.log("Calling API: " + counter ++)
+}
+//******************Local Storage***************** */
+// var user={
+//     "Name":"Rasmita",
+//     "DOB":"10th Oct 1991"
+// }
+// localStorage.setItem("name", "Rasmita");
+// localStorage.setItem("user", JSON.stringify(user));
+
+// localStorage.getItem("name");
+// JSON.parse(localStorage.getItem("user"));
+
+// // localStorage.removeItem("name");
+// // localStorage.clear();
+
+//****************Function Currying************ */
+// function multiply(x,y){
+//     console.log(x*y);
+// }
+// let multiplyByTwo = multiply.bind(this,2); // x is 2
+// let multiplyByThree = multiply.bind(this,3); // x is 3
+// multiplyByTwo(10);
+// multiplyByThree(10);
+
+// let custom1=multiply.bind(this,4,7);
+// custom1();
+
+// let custom2=multiply.bind(this);
+// custom2(6,7)
+
+// let sum = function(x){
+//     return function (y){
+//         console.log(x+y)
+//     }
+// }
+
+// let sum4 = sum(4);
+// sum4(8);
+
+// let sum3=sum(3);
+// sum3(8);
+
+//*******************Promise*********************** */
+// // let cart=["pen", "cap","toy","glass"];
+// let cart=[];
+
+// createOrder(cart).then(data =>console.log(data))
+// .catch(err=> console.log(err.message));
+
+// function createOrder(cart){
+//     const pr = new Promise(function(resolve, reject){
+//         if(cart.length ==0){
+//             const err=new Error("your cart is empty");
+//             reject(err);
+//         }else{
+//             let orderId= 123
+//             resolve(orderId);
+//         }
+//     });
+//     return pr;
+// }
+
+// const pr = new Promise(function (resolve, reject){
+//     if(invalid){
+//         const err=new Error("incorrect request");
+//         reject(err);
+//     }else{
+//         var response={}
+//         resolve(response)
+//     }
+// });
+
+// var API = "https://fakestoreapi.com/products";
+
+// var promise=fetch(API);
+// console.log(promise);
+
+//************************map, filter, reduce*************************************** */
+// var list=[
+//     {    firstname:"Satya", lastname:"Dash", age:37},
+//     {    firstname:"Sasmita", lastname:"Dash", age:36},
+//     {    firstname:"Rasmita", lastname:"Dash", age:32},
+//     {    firstname:"Surya", lastname:"Dash", age:28},
+//     {    firstname:"Sandeep", lastname:"Patro", age:44},
+//     {    firstname:"Subhalaxmi", lastname:"Palo", age:28},
+//     {    firstname:"Debasish", lastname:"Misra", age:33},
+//     {    firstname:"Subhadarshini", lastname:"Mohapatro", age:25}
+// ];
+// list.map(user=> user.fullName= user.firstname + " "+ user.lastname);
+// console.log(list);
+
+// var list_35=list.filter(user=> user.age > 35);
+// console.log(list_35);
+
+// // var totalAge = list.reduce(function(cum, curr){
+// //     cum= cum+curr.age;
+// //     return cum;
+// // }, 0);
+
+// var totalAge = list.reduce((cum, user, index) => {
+//     cum= cum+user.age;
+//     return cum;
+// }, 0);
+
+// console.log(totalAge);
+
+//*************************Callback************************** */
+// function calculate(radius, calculateFun){
+//     return calculateFun(radius);
+// }
+// function Area(r){
+//     return Math.PI *r*r;
+// }
+// function Circrumference(r){
+//     return 2*Math.PI *r;
+// }
+// function Diameter(r){
+//     return 2*r;
+// }
+// console.log (calculate(5,Diameter));
+// console.log (calculate(5,Circrumference));
+// console.log (calculate(5,Area));
+
+//********************setTimeout ************ */
+// Date.prototype.timeNow = function () {
+//     return ((this.getHours() < 10)?"0":"") + this.getHours() +":"+ ((this.getMinutes() < 10)?"0":"") + this.getMinutes() +":"+ ((this.getSeconds() < 10)?"0":"") + this.getSeconds();
+// }
+// console.log("Start: ", new Date().timeNow());
+// setTimeout(function(){
+//     console.log("callback: ", new Date().timeNow())
+// }, 0); 
+
+// // Long running code block
+// const endTime = new Date(new Date().getTime() + 1000 * 10);
+// while(new Date()< endTime){
+// }
+
+// console.log("End: ", new Date().timeNow());
+
+//************************Higher Order function /callback***************** */
+// function y(arg1){
+//     console.log("y");
+//     arg1();
+// }
+
+// function x(){
+//     console.log("x")
+// }
+// y(x);  //y is higher order function. x is first order function/ callback
+
+// var a = function xyz(){
+//     console.log("Named function expression");
+//     xyz(); // The named function can only be accessible within the function like recursion
+// }
+// a(); //Named function expression
+// xyz(); //Uncaught ReferenceError: xyz is not defined
+
+// function(){ //Uncaught SyntaxError: Function statements require a function name
+//     console.log("Anonymous Function")
+// }
+
+
+// A(); //Function Statement or Function Declaration
+// B(); //Uncaught TypeError: B is not a function
+
+// function A(){
+//     console.log("Function Statement or Function Declaration")
+// }
+
+// var B = function(){
+//     console.log("Function Expression")
+// }
+// B(); //Function Expression
 //************************************ */
 // function UpdateCounter(){
 //     var counter= 0; var test="";
